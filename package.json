@@ -10,9 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "@types/react": "^0.14.49",
+    "@types/react-addons-update": "^0.14.14",
     "@types/react-dom": "^0.14.18",
+    "@types/react-redux": "^4.4.33",
+    "@types/redux": "^3.6.31",
     "react": "^15.4.0",
-    "react-dom": "^15.4.0"
+    "react-addons-update": "^15.4.1",
+    "react-dom": "^15.4.0",
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "source-map-loader": "^0.1.5",

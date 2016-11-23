@@ -1,9 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import {  Provider } from 'react-redux';
+import bankStore from './bankStore';
 
-import { Hello } from "./components/Hello";
+import BankAppContainer from "./BankApp";
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <Provider store={bankStore}>
+        <BankAppContainer />
+    </Provider>,
     document.getElementById("example")
 );

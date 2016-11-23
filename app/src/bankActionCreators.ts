@@ -1,5 +1,6 @@
 import {ActionTypes,IAction,IActionAmount} from './constants'
 
+
 const bankActionCreators = {
 
     depositIntoAccount(amount:number):IActionAmount{
