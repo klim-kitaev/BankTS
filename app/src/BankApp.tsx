@@ -11,18 +11,31 @@ interface IBankAppProps {
     onToggle:IDispatch
 };
 
-interface IBankAppState {};
+interface IBankAppState {
+    amount:string
+};
 
 class BankApp extends React.Component<IBankAppProps, IBankAppState> {
 
+
+
+    componentWillMount() {
+        this.setState({amount:""});
+    }
+    
+
     handleDeposit(){
-        this.props.onDeposit(parseFloat(this.refs.amount.value));
-        this.refs.amount.value = '';
+        this.props.onDeposit(parseFloat(this.state.amount));
+        this.setState({amount:""});
     }
 
     handleWithdraw() {
-    this.props.onWithdraw(parseFloat(this.refs.amount.value));
-    this.refs.amount.value = '';
+    this.props.onWithdraw(parseFloat(this.state.amount));
+    this.setState({amount:""});
+    }
+
+    handleChange(event:any){
+        this.setState({amount:(event.target.value)});
     }
 
     refs: {
@@ -36,7 +49,7 @@ class BankApp extends React.Component<IBankAppProps, IBankAppState> {
         <br />
         <h1>Your balance is ${(this.props.balance).toFixed(2)}</h1>
         <div className="atm">
-          <input type="text" placeholder="Enter Ammount" ref="amount" />
+          <input type="text" placeholder="Enter Ammount" value={this.state.amount} onChange={this.handleChange.bind(this)} />
           <br />
           <button onClick={this.handleWithdraw.bind(this)}>Withdraw</button>
           <button onClick={this.handleDeposit.bind(this)}>Deposit</button>

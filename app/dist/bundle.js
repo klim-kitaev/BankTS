@@ -48,8 +48,8 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(2);
 	var react_redux_1 = __webpack_require__(3);
-	var bankStore_1 = __webpack_require__(44);
-	var BankApp_1 = __webpack_require__(51);
+	var bankStore_1 = __webpack_require__(34);
+	var BankApp_1 = __webpack_require__(41);
 	ReactDOM.render(React.createElement(react_redux_1.Provider, {store: bankStore_1.default}, 
 	    React.createElement(BankApp_1.default, null)
 	), document.getElementById("example"));
@@ -435,15 +435,15 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(32);
+	var _isPlainObject = __webpack_require__(13);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(42);
+	var _hoistNonReactStatics = __webpack_require__(32);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(43);
+	var _invariant = __webpack_require__(33);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -1889,295 +1889,6 @@
 
 /***/ },
 /* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseGetTag = __webpack_require__(33),
-	    getPrototype = __webpack_require__(39),
-	    isObjectLike = __webpack_require__(41);
-	
-	/** `Object#toString` result references. */
-	var objectTag = '[object Object]';
-	
-	/** Used for built-in method references. */
-	var funcProto = Function.prototype,
-	    objectProto = Object.prototype;
-	
-	/** Used to resolve the decompiled source of functions. */
-	var funcToString = funcProto.toString;
-	
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-	
-	/** Used to infer the `Object` constructor. */
-	var objectCtorString = funcToString.call(Object);
-	
-	/**
-	 * Checks if `value` is a plain object, that is, an object created by the
-	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.8.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 * }
-	 *
-	 * _.isPlainObject(new Foo);
-	 * // => false
-	 *
-	 * _.isPlainObject([1, 2, 3]);
-	 * // => false
-	 *
-	 * _.isPlainObject({ 'x': 0, 'y': 0 });
-	 * // => true
-	 *
-	 * _.isPlainObject(Object.create(null));
-	 * // => true
-	 */
-	function isPlainObject(value) {
-	  if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
-	    return false;
-	  }
-	  var proto = getPrototype(value);
-	  if (proto === null) {
-	    return true;
-	  }
-	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-	  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
-	    funcToString.call(Ctor) == objectCtorString;
-	}
-	
-	module.exports = isPlainObject;
-
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Symbol = __webpack_require__(34),
-	    getRawTag = __webpack_require__(37),
-	    objectToString = __webpack_require__(38);
-	
-	/** `Object#toString` result references. */
-	var nullTag = '[object Null]',
-	    undefinedTag = '[object Undefined]';
-	
-	/** Built-in value references. */
-	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-	
-	/**
-	 * The base implementation of `getTag` without fallbacks for buggy environments.
-	 *
-	 * @private
-	 * @param {*} value The value to query.
-	 * @returns {string} Returns the `toStringTag`.
-	 */
-	function baseGetTag(value) {
-	  if (value == null) {
-	    return value === undefined ? undefinedTag : nullTag;
-	  }
-	  value = Object(value);
-	  return (symToStringTag && symToStringTag in value)
-	    ? getRawTag(value)
-	    : objectToString(value);
-	}
-	
-	module.exports = baseGetTag;
-
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var root = __webpack_require__(35);
-	
-	/** Built-in value references. */
-	var Symbol = root.Symbol;
-	
-	module.exports = Symbol;
-
-
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var freeGlobal = __webpack_require__(36);
-	
-	/** Detect free variable `self`. */
-	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-	
-	/** Used as a reference to the global object. */
-	var root = freeGlobal || freeSelf || Function('return this')();
-	
-	module.exports = root;
-
-
-/***/ },
-/* 36 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
-	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
-	
-	module.exports = freeGlobal;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Symbol = __webpack_require__(34);
-	
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-	
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-	
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var nativeObjectToString = objectProto.toString;
-	
-	/** Built-in value references. */
-	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-	
-	/**
-	 * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
-	 *
-	 * @private
-	 * @param {*} value The value to query.
-	 * @returns {string} Returns the raw `toStringTag`.
-	 */
-	function getRawTag(value) {
-	  var isOwn = hasOwnProperty.call(value, symToStringTag),
-	      tag = value[symToStringTag];
-	
-	  try {
-	    value[symToStringTag] = undefined;
-	    var unmasked = true;
-	  } catch (e) {}
-	
-	  var result = nativeObjectToString.call(value);
-	  if (unmasked) {
-	    if (isOwn) {
-	      value[symToStringTag] = tag;
-	    } else {
-	      delete value[symToStringTag];
-	    }
-	  }
-	  return result;
-	}
-	
-	module.exports = getRawTag;
-
-
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
-
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-	
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var nativeObjectToString = objectProto.toString;
-	
-	/**
-	 * Converts `value` to a string using `Object.prototype.toString`.
-	 *
-	 * @private
-	 * @param {*} value The value to convert.
-	 * @returns {string} Returns the converted string.
-	 */
-	function objectToString(value) {
-	  return nativeObjectToString.call(value);
-	}
-	
-	module.exports = objectToString;
-
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var overArg = __webpack_require__(40);
-	
-	/** Built-in value references. */
-	var getPrototype = overArg(Object.getPrototypeOf, Object);
-	
-	module.exports = getPrototype;
-
-
-/***/ },
-/* 40 */
-/***/ function(module, exports) {
-
-	/**
-	 * Creates a unary function that invokes `func` with its argument transformed.
-	 *
-	 * @private
-	 * @param {Function} func The function to wrap.
-	 * @param {Function} transform The argument transform.
-	 * @returns {Function} Returns the new function.
-	 */
-	function overArg(func, transform) {
-	  return function(arg) {
-	    return func(transform(arg));
-	  };
-	}
-	
-	module.exports = overArg;
-
-
-/***/ },
-/* 41 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is object-like. A value is object-like if it's not `null`
-	 * and has a `typeof` result of "object".
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 * @example
-	 *
-	 * _.isObjectLike({});
-	 * // => true
-	 *
-	 * _.isObjectLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObjectLike(_.noop);
-	 * // => false
-	 *
-	 * _.isObjectLike(null);
-	 * // => false
-	 */
-	function isObjectLike(value) {
-	  return value != null && typeof value == 'object';
-	}
-	
-	module.exports = isObjectLike;
-
-
-/***/ },
-/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -2233,7 +1944,7 @@
 
 
 /***/ },
-/* 43 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2291,23 +2002,23 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 44 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var redux_1 = __webpack_require__(11);
-	var bankReducer_1 = __webpack_require__(45);
+	var bankReducer_1 = __webpack_require__(35);
 	var bankStore = redux_1.createStore(bankReducer_1.default);
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = bankStore;
 
 
 /***/ },
-/* 45 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var update = __webpack_require__(46);
+	var update = __webpack_require__(36);
 	var redux_1 = __webpack_require__(11);
 	var initialState = {
 	    balance: 0,
@@ -2341,13 +2052,13 @@
 
 
 /***/ },
-/* 46 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(47);
+	module.exports = __webpack_require__(37);
 
 /***/ },
-/* 47 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2364,10 +2075,10 @@
 	
 	'use strict';
 	
-	var _prodInvariant = __webpack_require__(48),
-	    _assign = __webpack_require__(49);
+	var _prodInvariant = __webpack_require__(38),
+	    _assign = __webpack_require__(39);
 	
-	var invariant = __webpack_require__(50);
+	var invariant = __webpack_require__(40);
 	var hasOwnProperty = {}.hasOwnProperty;
 	
 	function shallowCopy(x) {
@@ -2464,7 +2175,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 48 */
+/* 38 */
 /***/ function(module, exports) {
 
 	/**
@@ -2507,7 +2218,7 @@
 	module.exports = reactProdInvariant;
 
 /***/ },
-/* 49 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2596,7 +2307,7 @@
 
 
 /***/ },
-/* 50 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2651,7 +2362,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 51 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2662,7 +2373,7 @@
 	};
 	var React = __webpack_require__(1);
 	var react_redux_1 = __webpack_require__(3);
-	var bankActionCreators_1 = __webpack_require__(52);
+	var bankActionCreators_1 = __webpack_require__(42);
 	;
 	;
 	var BankApp = (function (_super) {
@@ -2670,13 +2381,19 @@
 	    function BankApp() {
 	        _super.apply(this, arguments);
 	    }
+	    BankApp.prototype.componentWillMount = function () {
+	        this.setState({ amount: "" });
+	    };
 	    BankApp.prototype.handleDeposit = function () {
-	        this.props.onDeposit(parseFloat(this.refs.amount.value));
-	        this.refs.amount.value = '';
+	        this.props.onDeposit(parseFloat(this.state.amount));
+	        this.setState({ amount: "" });
 	    };
 	    BankApp.prototype.handleWithdraw = function () {
-	        this.props.onWithdraw(parseFloat(this.refs.amount.value));
-	        this.refs.amount.value = '';
+	        this.props.onWithdraw(parseFloat(this.state.amount));
+	        this.setState({ amount: "" });
+	    };
+	    BankApp.prototype.handleChange = function (event) {
+	        this.setState({ amount: (event.target.value) });
 	    };
 	    BankApp.prototype.render = function () {
 	        return (React.createElement("div", null, 
@@ -2689,7 +2406,7 @@
 	                "Your balance is $", 
 	                (this.props.balance).toFixed(2)), 
 	            React.createElement("div", {className: "atm"}, 
-	                React.createElement("input", {type: "text", placeholder: "Enter Ammount", ref: "amount"}), 
+	                React.createElement("input", {type: "text", placeholder: "Enter Ammount", value: this.state.amount, onChange: this.handleChange.bind(this)}), 
 	                React.createElement("br", null), 
 	                React.createElement("button", {onClick: this.handleWithdraw.bind(this)}, "Withdraw"), 
 	                React.createElement("button", {onClick: this.handleDeposit.bind(this)}, "Deposit")), 
@@ -2724,7 +2441,7 @@
 
 
 /***/ },
-/* 52 */
+/* 42 */
 /***/ function(module, exports) {
 
 	"use strict";
